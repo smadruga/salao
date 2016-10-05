@@ -36,7 +36,7 @@ class Login extends CI_Controller {
     public function index() {
 
         #$_SESSION['log']['cliente'] = $_SESSION['log']['nome_modulo'] = 
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'odonto';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'salao';
         $_SESSION['log']['idTab_Modulo'] = 1;
         
         ###################################################
