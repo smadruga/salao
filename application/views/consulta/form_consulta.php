@@ -169,16 +169,50 @@
                                        autofocus name="ValorServico" value="<?php echo $query['ValorServico'] ?>">
                             </div>
                         </div>                          
-                    </div>
-                                      
+                    </div>               
                 </div>   
 
                 <div class="form-group">
                     <div class="row">
+                        <div class="input_fields_wrap">
+                            <!--<div><input type="text" name="mytext[]"></div>-->
+                            <div class="col-md-4">
+                                <label for="idApp_Servico">Serviço:</label>
+                                <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/servico" role="button"> 
+                                    <span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
+                                </a>
+                                <select data-placeholder="Selecione uma opção..." class="form-control" onchange="addValues(this.value)" <?php echo $readonly; ?>
+                                        id="lista" name="idApp_Servico[]">
+                                    <option value="">-- Selecione uma opção --</option>
+                                    <?php
+                                    foreach ($select['Servico'] as $key => $row) {
+                                        if ($query['idApp_Servico'] == $key) {
+                                            echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+                                        } else {
+                                            echo '<option value="' . $key . '">' . $row . '</option>';
+                                        }
+                                    }
+                                    ?>   
+                                </select>          
+                            </div>
+                            <div class="col-md-3">
+                                <label for="ValorServico">Valor do Serviço:</label>
+                                <div class="input-group" id="txtHint">
+                                    <span class="input-group-addon" id="basic-addon1">R$</span>
+                                    <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""
+                                           autofocus name="ValorServico[]" value="<?php echo $query['ValorServico'] ?>">
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>                    
+                
+                <div class="form-group">
+                    <div class="row">
                         <div class="col-md-4">
-                            <a class="btn btn-xs btn-warning" href="<?php echo base_url() ?>tabelas/cadastrar/servico" role="button"> 
+                            <a class="add_field_button btn btn-xs btn-warning">
                                 <span class="glyphicon glyphicon-plus"></span>
-                            </a>   
+                            </a>                             
                         </div>
                     </div>
                 </div>                   

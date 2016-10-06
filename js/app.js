@@ -130,6 +130,21 @@ $(document).ready(function () {
 
     });     
 
+var x = 1; //initlal text box count
+$(".add_field_button").click(function(e){ //on add input button click
+    e.preventDefault();
+    x++; //text box increment
+    //$(".input_fields_wrap").append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+    $(".input_fields_wrap").append(
+        '<div class="col-md-4"><label for="idApp_Servico">Serviço:</label><a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/servico" role="button"> <span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b></a><select data-placeholder="Selecione uma opção..." class="form-control" onchange="addValues(this.value)" <?php echo $readonly; ?>id="lista" name="idApp_Servico[]"><option value="">-- Selecione uma opção --</option><?phpforeach ($select[\'Servico\'] as $key => $row) {if ($query[\'idApp_Servico\'] == $key) {echo \'<option value="\' . $key . \'" selected="selected">\' . $row . \'</option>\';} else {echo \'<option value="\' . $key . \'">\' . $row . \'</option>\';}}?> </select></div>'
+    ); //add input box
+
+});
+
+$(".input_fields_wrap").on("click",".remove_field", function(e){ //user click on remove text
+    e.preventDefault(); $(this).parent('div').remove();
+})
+
     /*
      * Pega o valor selecionado de um menu dropdown e adiciona numa lista
     */
