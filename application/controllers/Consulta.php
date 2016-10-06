@@ -99,6 +99,8 @@ class Consulta extends CI_Controller {
 
         $data['select']['TipoConsulta'] = $this->Basico_model->select_tipo_consulta();
         $data['select']['Profissional'] = $this->Basico_model->select_profissional();
+        $data['select']['Servico'] = $this->Basico_model->select_servico();
+        $data['select']['Produto'] = $this->Basico_model->select_produto();
         $data['select']['Dependente'] = $this->Consulta_model->select_dependente_responsavel($data['query']['idApp_Responsavel']);
 
         $data['select']['Paciente'] = array (
@@ -106,7 +108,7 @@ class Consulta extends CI_Controller {
             'D' => 'Dependente',
         );
         
-        $data['titulo'] = 'Marcar Consulta';
+        $data['titulo'] = 'Marcar Sessão';
         $data['form_open_path'] = 'consulta/cadastrar';
         $data['panel'] = 'primary';
         $data['readonly'] = '';
@@ -253,7 +255,7 @@ class Consulta extends CI_Controller {
 
         //echo '<br><br><br><br>================================== '.$data['query']['idTab_Status'];
         
-        $data['titulo'] = 'Editar Consulta';
+        $data['titulo'] = 'Editar Sessão';
         $data['form_open_path'] = 'consulta/alterar';
         #$data['readonly'] = '';
         #$data['disabled'] = '';
@@ -321,7 +323,7 @@ class Consulta extends CI_Controller {
             $_SESSION['Responsavel'] = $this->Responsavel_model->get_responsavel($idApp_Responsavel, TRUE);
         }
         
-        $data['titulo'] = 'Listar Consultas';
+        $data['titulo'] = 'Listar Sessões';
         $data['panel'] = 'primary';
         $data['novo'] = '';
         $data['metodo'] = 4;

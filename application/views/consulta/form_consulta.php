@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="col-md-3 form-inline">
-                            <label for="idTab_TipoConsulta">Tipo de Consulta:</label><br>
+                            <label for="idTab_TipoConsulta">Tipo de Sessão:</label><br>
                             <div class="form-group">
                                 <div class="btn-group" data-toggle="buttons">
                                     <?php
@@ -138,6 +138,60 @@
                     </div>
                 </div>                 
 
+                <hr>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="idApp_Servico">Serviço:</label>
+                            <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/servico" role="button"> 
+                                <span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
+                            </a>
+                            <select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+                                    id="lista" name="idApp_Servico">
+                                <option value="">-- Selecione uma opção --</option>
+                                <?php
+                                foreach ($select['Servico'] as $key => $row) {
+                                    if ($query['idApp_Servico'] == $key) {
+                                        echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+                                    } else {
+                                        echo '<option value="' . $key . '">' . $row . '</option>';
+                                    }
+                                }
+                                ?>   
+                            </select>          
+                        </div>
+                    </div>
+                </div>   
+
+                <hr>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="idApp_Produto">Produto:</label>
+                            <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/produto" role="button"> 
+                                <span class="glyphicon glyphicon-plus"></span> <b>Novo Produto</b>
+                            </a>
+                            <select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+                                    id="idApp_Produto" name="idApp_Produto">
+                                <option value="">-- Selecione uma opção --</option>
+                                <?php
+                                foreach ($select['Produto'] as $key => $row) {
+                                    if ($query['idApp_Produto'] == $key) {
+                                        echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+                                    } else {
+                                        echo '<option value="' . $key . '">' . $row . '</option>';
+                                    }
+                                }
+                                ?>   
+                            </select>          
+                        </div>
+                    </div>
+                </div>   
+
+                <hr>                
+                
                 <?php if ($metodo == 2) { ?>
 
 

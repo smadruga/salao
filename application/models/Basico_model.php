@@ -238,5 +238,69 @@ class Basico_model extends CI_Model {
 
         return $array;
     }    
+
+    public function select_servico($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(
+                'SELECT '
+                    . 'idApp_Servico, '
+                    . 'NomeServico, '
+                    . 'ValorServico '
+                    . 'FROM '
+                    . 'App_Servico '
+                    . 'WHERE '
+                    . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                    . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] );
+        } else {
+            $query = $this->db->query('SELECT idApp_Servico, NomeServico, ValorServico FROM App_Servico WHERE idSis_Usuario = ' . $_SESSION['log']['id']);
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_Servico] = $row->NomeServico;
+            }
+        }
+
+        return $array;
+    }    
+    
+    public function select_produto($data = FALSE) {
+
+        if ($data === TRUE) {
+            $array = $this->db->query(
+                'SELECT '
+                    . 'idApp_Produto, '
+                    . 'NomeProduto, '
+                    . 'QuantidadeCompra, '
+                    . 'Unidade, '
+                    . 'ValorCompra, '
+                    . 'ValorVenda '
+                    . 'FROM '
+                    . 'App_Produto '
+                    . 'WHERE '
+                    . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                    . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] );
+        } else {
+            $query = $this->db->query(
+                'SELECT '
+                    . 'idApp_Produto, '
+                    . 'NomeProduto, '
+                    . 'QuantidadeCompra, '
+                    . 'Unidade, '
+                    . 'ValorCompra, '
+                    . 'ValorVenda '
+                    . 'FROM '
+                    . 'App_Produto '
+                    . 'WHERE '
+                    . 'idSis_Usuario = ' . $_SESSION['log']['id']);
+            
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idApp_Produto] = $row->NomeProduto;
+            }
+        }
+
+        return $array;
+    }        
     
 }

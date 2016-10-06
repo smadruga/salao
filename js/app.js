@@ -129,7 +129,18 @@ $(document).ready(function () {
         $('#radiogeral'+ value).addClass("btn btn-warning active");
 
     });     
+
+    /*
+     * Pega o valor selecionado de um menu dropdown e adiciona numa lista
+     */
+    $("select[id='lista']").click(function () {
+        //alert( $(this).attr('value') );
+        //alert( $( "#lista" ).val() );
+        alert( $( "#lista option:selected" ).text() );
+    });
     
+    
+    //$( "select[id='lista'] option:selected" ).text();
 
     /*
      * As duas funções a seguir servem para exibir ou ocultar uma div em função
