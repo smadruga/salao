@@ -132,13 +132,62 @@ $(document).ready(function () {
 
     /*
      * Pega o valor selecionado de um menu dropdown e adiciona numa lista
-     */
+    */
     $("select[id='lista']").click(function () {
         //alert( $(this).attr('value') );
         //alert( $( "#lista" ).val() );
-        alert( $( "#lista option:selected" ).text() );
+        //alert( $( "#lista option:selected" ).text() );
+        str = $( "#lista option:selected" ).val();
+        
+        if (str == "") {
+            document.getElementById("txtHint").innerHTML = "";
+            return;
+        } else { 
+            alert( str );
+            
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("txtHint").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET","getvalues.php?q="+str,true);
+            xmlhttp.send();
+        }
+        
     });
+     
     
+    /*
+    function addValues(str) {
+        if (str == "") {
+            document.getElementById("txtHint").innerHTML = "";
+            return;
+        } else { 
+            alert( 'oi' );
+            /*
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("txtHint").innerHTML = this.responseText;
+                }
+            };
+            xmlhttp.open("GET","getuser.php?q="+str,true);
+            xmlhttp.send();
+        }
+    }    */
     
     //$( "select[id='lista'] option:selected" ).text();
 

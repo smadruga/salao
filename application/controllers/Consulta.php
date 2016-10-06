@@ -57,6 +57,8 @@ class Consulta extends CI_Controller {
             'idApp_Profissional',
             'Procedimento',
             'Obs',
+            
+            'ValorServico',
                 ), TRUE));
 
         if ($idApp_Responsavel) {

@@ -50,10 +50,10 @@ foreach ($query->result_array() as $row) {
                 <span class="glyphicon glyphicon-edit"></span> Editar Dados
             </a>          
             <a class="btn btn-<?php echo $row['class']; ?>" href="<?php echo base_url() . 'consulta/cadastrar/' . $row['idApp_Responsavel'] . '/' . $row['idApp_Dependente'] ?>" role="button"> 
-                <span class="glyphicon glyphicon-time"></span> Marcar Consulta
+                <span class="glyphicon glyphicon-time"></span> Marcar Sessão
             </a>            
             <a class="btn btn-<?php echo $row['class']; ?>" href="<?php echo base_url() . 'consulta/listar/' . $row['idApp_Responsavel'] ?>" role="button"> 
-                <span class="glyphicon glyphicon-list"></span> Listar Consultas
+                <span class="glyphicon glyphicon-list"></span> Listar Sessões
             </a>  
             
             <br><br>

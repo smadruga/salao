@@ -35,7 +35,7 @@
 
     <li <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
         <a href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Responsavel']['idApp_Responsavel']; ?>">
-            <span class="glyphicon glyphicon-list"></span> Listar Sessão
+            <span class="glyphicon glyphicon-list"></span> Listar Sessões
         </a>
     </li>           
     
