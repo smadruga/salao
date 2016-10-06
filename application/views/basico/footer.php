@@ -12,7 +12,8 @@
         <script src="<?php echo base_url(); ?>js/bootstrap-datepicker.pt-BR.min.js"></script>
         <script src="<?php echo base_url(); ?>js/bootstrap-datetimepicker.js"></script>
         <!--<script src="<?php echo base_url(); ?>js/clockpicker.js"></script>-->
-        <script src="<?php echo base_url(); ?>js/jquery.maskedinput.min.js"></script>      
+        <script src="<?php echo base_url(); ?>js/jquery.maskedinput.min.js"></script>
+        <script src="<?php echo base_url(); ?>js/jquery.mask.js"></script>  
         <script src="<?php echo base_url(); ?>js/chosen.jquery.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>js/jquery-sortable.js"></script>
         <script src="<?php echo base_url(); ?>js/jquery.countdown.js"></script>

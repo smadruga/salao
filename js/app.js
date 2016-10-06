@@ -82,6 +82,7 @@ $(document).ready(function () {
     $(".Cpf").mask("999.999.999-99");
     $(".Cep").mask("99999-999");
     $(".TituloEleitor").mask("9999.9999.9999");
+    $(".Valor").mask("#.##0,00", {reverse: true});
 
     $(".Celular").mask("(99) 9999?9-9999");
     $(".CelularVariavel").on("blur", function () {

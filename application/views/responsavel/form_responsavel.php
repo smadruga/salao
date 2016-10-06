@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="NomeResponsavel">Nome do Paciente: *</label>
+                            <label for="NomeResponsavel">Nome do Cliente: *</label>
                             <input type="text" class="form-control" id="NomeResponsavel" maxlength="255" <?php echo $readonly; ?>
                                    name="NomeResponsavel" autofocus value="<?php echo $query['NomeResponsavel']; ?>">
                         </div>

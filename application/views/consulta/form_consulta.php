@@ -84,8 +84,27 @@
 
                 <div class="form-group">
                     <div class="row">
+                        <div class="col-md-4">
+                            <label for="idApp_Profissional">Profissional: *</label>
+                            <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/profissional" role="button"> 
+                                <span class="glyphicon glyphicon-plus"></span> <b>Novo Profissional</b>
+                            </a>
+                            <select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+                                    id="idApp_Profissional" name="idApp_Profissional">
+                                <option value="">-- Selecione uma opção --</option>
+                                <?php
+                                foreach ($select['Profissional'] as $key => $row) {
+                                    if ($query['idApp_Profissional'] == $key) {
+                                        echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+                                    } else {
+                                        echo '<option value="' . $key . '">' . $row . '</option>';
+                                    }
+                                }
+                                ?>   
+                            </select>          
+                        </div>                            
                         <div class="col-md-3 form-inline">
-                            <label for="Paciente">Paciente:</label><br>
+                            <label for="Paciente">Cliente:</label><br>
                             <div class="form-group">
                                 <label class="radio-inline">
                                     <input type="radio" id="hide"
@@ -115,39 +134,9 @@
                                 }
                                 ?>   
                             </select>          
-                        </div>                                
-                        <div class="col-md-4">
-                            <label for="idApp_Profissional">Profissional: *</label>
-                            <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/profissional" role="button"> 
-                                <span class="glyphicon glyphicon-plus"></span> <b>Novo Profissional</b>
-                            </a>
-                            <select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-                                    id="idApp_Profissional" name="idApp_Profissional">
-                                <option value="">-- Selecione uma opção --</option>
-                                <?php
-                                foreach ($select['Profissional'] as $key => $row) {
-                                    if ($query['idApp_Profissional'] == $key) {
-                                        echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
-                                    } else {
-                                        echo '<option value="' . $key . '">' . $row . '</option>';
-                                    }
-                                }
-                                ?>   
-                            </select>          
-                        </div>                            
+                        </div>                                                        
                     </div>
                 </div>                 
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="Procedimento">Procedimento:</label>
-                            <textarea class="form-control" id="Procedimento"
-                                      name="Procedimento"><?php echo $query['Procedimento']; ?></textarea>
-                        </div>
-                    </div>
-                </div>                 
-
 
                 <?php if ($metodo == 2) { ?>
 

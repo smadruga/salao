@@ -11,8 +11,8 @@
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Próximas Consultas</a></li>
-                    <li role="presentation"><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Histórico de Consultas</a></li>
+                    <li role="presentation" class="active"><a href="#proxima" aria-controls="proxima" role="tab" data-toggle="tab">Próximas Sessão</a></li>
+                    <li role="presentation"><a href="#anterior" aria-controls="anterior" role="tab" data-toggle="tab">Histórico de Sessão</a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -37,9 +37,8 @@
                                 echo '<h4><b>Status: ' . $row['Status'] . '</b></h4>';
                                 echo '<p><b>Data:</b> ' . $this->basico->mascara_data($row['DataInicio'][0], 'barras') . ' '
                                 . 'das ' . substr($row['DataInicio'][1], 0, 5) . ' às ' . substr($row['DataFim'][1], 0, 5) . '</p>';
-                                echo '<p><b>Paciente:</b> ' . $row['NomePaciente'] . '</p>';
+                                echo '<p><b>Cliente:</b> ' . $row['NomePaciente'] . '</p>';
                                 echo '<p><b>Profissional:</b> ' . $row['NomeProfissional'] . '</p>';                                
-                                echo '<p><b>Procedimento:</b><br> ' . nl2br($row['Procedimento']) . '</p>';
                                 echo '<p><b>Obs:</b><br> ' . nl2br($row['Obs']) . '</p>';
                                 echo '</div>';
                             }
@@ -70,9 +69,8 @@
                                 echo '<h4><b>Status: ' . $row['Status'] . '</b></h4>';
                                 echo '<p><b>Data:</b> ' . $this->basico->mascara_data($row['DataInicio'][0], 'barras') . ' '
                                 . 'das ' . substr($row['DataInicio'][1], 0, 5) . ' às ' . substr($row['DataFim'][1], 0, 5) . '</p>';
-                                echo '<p><b>Paciente:</b> ' . $row['NomePaciente'] . '</p>';
+                                echo '<p><b>Cliente:</b> ' . $row['NomePaciente'] . '</p>';
                                 echo '<p><b>Profissional:</b> ' . $row['NomeProfissional'] . '</p>';                                
-                                echo '<p><b>Procedimento:</b><br> ' . nl2br($row['Procedimento']) . '</p>';
                                 echo '<p><b>Obs:</b><br> ' . nl2br($row['Obs']) . '</p>';
                                 echo '</div>';                                
                             }

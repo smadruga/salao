@@ -77,7 +77,7 @@ class Responsavel extends CI_Controller {
         $data['select']['Municipio'] = $this->Basico_model->select_municipio();
         $data['select']['Sexo'] = $this->Basico_model->select_sexo();
 
-        $data['titulo'] = 'Cadastrar Paciente';
+        $data['titulo'] = 'Cadastrar Cliente';
         $data['form_open_path'] = 'responsavel/cadastrar';
         $data['readonly'] = '';
         $data['disabled'] = '';
@@ -308,7 +308,7 @@ class Responsavel extends CI_Controller {
             $_SESSION['agenda']['HoraFim'] = substr($this->input->get('end'),0,-3);            
         }
         
-        $data['titulo'] = "Pesquisar Paciente";
+        $data['titulo'] = "Pesquisar Cliente";
         
         $data['Pesquisa'] = $this->input->post('Pesquisa');
         //echo date('d/m/Y H:i:s', $data['start'],0,-3));

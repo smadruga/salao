@@ -12,7 +12,7 @@
             <div class="panel-heading"><strong><?php echo $titulo; ?></strong></div>
             <div class="panel-body">
 
-                <p>Informe o <b>Nome do Paciente, Data de Nascimento ou Telefone</b>:</p>
+                <p>Informe o <b>Nome do Cliente, Data de Nascimento ou Telefone</b>:</p>
 
                 <div class="row">
                     <?php echo form_open('responsavel/pesquisar', 'role="form"'); ?>

@@ -17,7 +17,7 @@
                 </li>
 
                 <li class="dropdown <?php if (substr(uri_string(), 0, strpos(uri_string(), '/')) == 'dependente') { echo 'active'; } ?>">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Paciente <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cliente <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url() ?>responsavel/cadastrar">Cadastrar</a></li>
                         <li><a href="<?php echo base_url() ?>responsavel/pesquisar">Pesquisar</a></li>
@@ -28,17 +28,19 @@
                 </li>                    
 
                 <li class="dropdown <?php if (substr(uri_string(), 0, strpos(uri_string(), '/')) == 'consulta') { echo 'active'; } ?>">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Consulta <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sessão <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo base_url() ?>responsavel/pesquisar">Marcar Consulta</a></li>
-                        <li><a href="<?php echo base_url() ?>responsavel/pesquisar">Editar Consulta</a></li>
+                        <li><a href="<?php echo base_url() ?>responsavel/pesquisar">Marcar Sessão</a></li>
+                        <li><a href="<?php echo base_url() ?>responsavel/pesquisar">Editar Sessão</a></li>
                     </ul>
                 </li>   
                 
                 <li class="dropdown <?php if (substr(uri_string(), 0, strpos(uri_string(), '/')) == 'tabelas') { echo 'active'; } ?>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tabelas <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo base_url() ?>tabelas/cadastrar/profissional">Profissional</a></li>
+                        <li><a href="<?php echo base_url() ?>tabelas/profissional">Profissional</a></li>
+                        <li><a href="<?php echo base_url() ?>tabelas/servico">Serviços</a></li>
+                        <li><a href="<?php echo base_url() ?>tabelas/produto">Produtos</a></li>
                     </ul>
                 </li>                 
 
