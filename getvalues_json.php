@@ -55,7 +55,7 @@ elseif ($_GET['q'] == 2) {
     while ($row = mysql_fetch_assoc($result)) {
 
         $event_array[] = array(
-            'id' => $row['idTab_Servico'],
+            'id' => $row['idTab_Produto'],
             'name' => utf8_encode($row['NomeProduto']),
             'value' => $row['ValorVenda'],
         );

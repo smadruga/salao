@@ -22,6 +22,35 @@ class Consulta_model extends CI_Model {
             return $this->db->insert_id();
     }
 
+    public function set_dados_dinamicos($table, $fields, $data) {
+        /*
+        $i=0;
+        $q='';
+        while ($data['idTab_Servico'][$i]) {
+            $q = $q . '("' . $this->db->escape($this->input->post('idTab_Servico'.$i)) . '", ';
+            $q = $q . '"0.00"), ';            
+            $i++;
+        }
+        echo $q = substr($q, 0, strlen($q)-2) . '<br>';
+                
+        //echo $this->db->last_query();
+          echo '<br>';
+          echo "<pre>";
+          print_r($data);
+          echo "</pre>";
+          exit ();   
+        */
+        
+        $query = $this->db->query('INSERT INTO ' . $table . ' (' . $fields . ') VALUES ' . $data);
+        //$query = $this->db->query('INSERT INTO App_Servico (idTab_Servico, ValorServico) VALUES ' . $data);
+        //$this->db->insert($table, $data);
+                
+        if ($this->db->affected_rows() === 0)
+            return FALSE;
+        else
+            return $this->db->insert_id();
+    }    
+    
     public function get_consulta($data) {
         $query = $this->db->query('SELECT * FROM App_Consulta WHERE idApp_Consulta = ' . $data);
         $query = $query->result_array();

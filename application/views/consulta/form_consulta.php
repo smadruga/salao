@@ -140,13 +140,7 @@
 
                 <hr>
                 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="text" name="SCount" id="SCount" value="1"/>
-                        </div>
-                    </div>
-                </div>                 
+                <input type="hidden" name="SCount" id="SCount" value="1"/>
                 
                 <div class="form-group">
                     <div class="row">
@@ -160,7 +154,7 @@
                                 <option value="">-- Selecione uma opção --</option>
                                 <?php
                                 foreach ($select['Servico'] as $key => $row) {
-                                    if ($query['idTab_Servico'] == $key) {
+                                    if ($servico['idTab_Servico1'] == $key) {
                                         echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
                                     } else {
                                         echo '<option value="' . $key . '">' . $row . '</option>';
@@ -174,7 +168,7 @@
                             <div class="input-group" id="txtHint">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
                                 <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""
-                                       name="ValorServico1" value="<?php echo $query['ValorServico'] ?>">
+                                       name="ValorServico1" value="<?php echo $servico['ValorServico1'] ?>">
                             </div>
                         </div>                          
                     </div>               
@@ -194,13 +188,7 @@
                 
                 <hr>
                 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="text" name="PCount" id="PCount" value="1"/>
-                        </div>
-                    </div>
-                </div>   
+                <input type="hidden" name="PCount" id="PCount" value="1"/>
                 
                 <div class="form-group">
                     <div class="row">
@@ -210,11 +198,11 @@
                                 <span class="glyphicon glyphicon-plus"></span> <b>Novo Produto</b>
                             </a>
                             <select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-                                    id="idTab_Produto" name="idTab_Produto">
+                                    id="idTab_Produto" name="idTab_Produto1">
                                 <option value="">-- Selecione uma opção --</option>
                                 <?php
                                 foreach ($select['Produto'] as $key => $row) {
-                                    if ($query['idTab_Produto'] == $key) {
+                                    if ($produto['idTab_Produto1'] == $key) {
                                         echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
                                     } else {
                                         echo '<option value="' . $key . '">' . $row . '</option>';
@@ -228,13 +216,13 @@
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
                                 <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""
-                                       name="ValorProduto1" value="<?php echo $query['ValorProduto'] ?>">
+                                       name="ValorProduto1" value="<?php echo $produto['ValorProduto1'] ?>">
                             </div>
                         </div>                            
                         <div class="col-md-1">
-                            <label for="QuantidadeCompra">Qtd:</label>                           
+                            <label for="Quantidade">Qtd:</label>                           
                             <input type="text" class="form-control" maxlength="3" placeholder="0"
-                                   name="QuantidadeCompra1" value="<?php echo $query['QuantidadeCompra'] ?>">
+                                   name="Quantidade1" value="<?php echo $produto['Quantidade1'] ?>">
                         </div>
                         <div class="col-md-3">
                             <label for="ValorServico">Subtotal:</label>

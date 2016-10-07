@@ -184,7 +184,7 @@ $(document).ready(function () {
                 $select.append('<option value="">-- Selecione uma opção --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
-                    $select.append('<option id="' + val.id + '">' + val.name + '</option>');
+                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
             },
             error: function () {
@@ -269,7 +269,7 @@ $(document).ready(function () {
                 $select.append('<option value="">-- Selecione uma opção --</option>');
                 $.each(data, function (key, val) {
                     //alert(val.id);
-                    $select.append('<option id="' + val.id + '">' + val.name + '</option>');
+                    $select.append('<option value="' + val.id + '">' + val.name + '</option>');
                 })
             },
             error: function () {
