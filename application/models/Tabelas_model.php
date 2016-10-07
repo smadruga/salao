@@ -26,7 +26,7 @@ class Tabelas_model extends CI_Model {
 
     public function set_servico($data) {
 
-        $query = $this->db->insert('App_Servico', $data);
+        $query = $this->db->insert('Tab_Servico', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -38,7 +38,7 @@ class Tabelas_model extends CI_Model {
 
     public function set_produto($data) {
 
-        $query = $this->db->insert('App_Produto', $data);
+        $query = $this->db->insert('Tab_Produto', $data);
 
         if ($this->db->affected_rows() === 0) {
             return FALSE;
@@ -56,14 +56,14 @@ class Tabelas_model extends CI_Model {
     }
 
     public function get_servico($data) {
-        $query = $this->db->query('SELECT * FROM App_Servico WHERE idApp_Servico = ' . $data);
+        $query = $this->db->query('SELECT * FROM Tab_Servico WHERE idTab_Servico = ' . $data);
         $query = $query->result_array();
 
         return $query[0];
     }
 
     public function get_produto($data) {
-        $query = $this->db->query('SELECT * FROM App_Produto WHERE idApp_Produto = ' . $data);
+        $query = $this->db->query('SELECT * FROM Tab_Produto WHERE idTab_Produto = ' . $data);
         $query = $query->result_array();
 
         return $query[0];
@@ -91,7 +91,7 @@ class Tabelas_model extends CI_Model {
     public function update_servico($data, $id) {
 
         unset($data['Id']);
-        $query = $this->db->update('App_Servico', $data, array('idApp_Servico' => $id));
+        $query = $this->db->update('Tab_Servico', $data, array('idTab_Servico' => $id));
         /*
           echo $this->db->last_query();
           echo '<br>';
@@ -110,7 +110,7 @@ class Tabelas_model extends CI_Model {
     public function update_produto($data, $id) {
 
         unset($data['Id']);
-        $query = $this->db->update('App_Produto', $data, array('idApp_Produto' => $id));
+        $query = $this->db->update('Tab_Produto', $data, array('idTab_Produto' => $id));
         /*
           echo $this->db->last_query();
           echo '<br>';
@@ -162,7 +162,7 @@ class Tabelas_model extends CI_Model {
     public function lista_servico($x) {
 
         $query = $this->db->query('SELECT * '
-                . 'FROM App_Servico '
+                . 'FROM Tab_Servico '
                 . 'WHERE '
                 . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' '
@@ -195,7 +195,7 @@ class Tabelas_model extends CI_Model {
     public function lista_produto($x) {
 
         $query = $this->db->query('SELECT * '
-                . 'FROM App_Produto '
+                . 'FROM Tab_Produto '
                 . 'WHERE '
                 . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' '

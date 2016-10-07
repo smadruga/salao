@@ -130,17 +130,21 @@ $(document).ready(function () {
 
     });     
 
-    var x = 1; //initlal text box count
+    var ps = 1; //initlal text box count
     $(".add_field_button").click(function(e){ //on add input button click
         e.preventDefault();
-        x++; //text box increment
+        
+        //alert( $("#SCount").val() );      
+        ps++; //text box increment
+        $("#SCount").val(ps);
+        
         //$(".input_fields_wrap").append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box 
         $(".input_fields_wrap").append('\
-            <div class="form-group" id="div'+x+'">\
+            <div class="form-group" id="div'+ps+'">\
                 <div class="row">\
                     <div class="col-md-4">\
-                        <label for="idApp_Servico">Serviço:</label><br>\
-                        <select class="form-control" id="listadinamica'+x+'" name="idApp_Servico'+x+'">\
+                        <label for="idTab_Servico">Serviço:</label><br>\
+                        <select class="form-control" id="listadinamica'+ps+'" name="idTab_Servico'+ps+'">\
                             <option value="">-- Selecione uma opção --</option>\
                         </select>\
                     </div>\
@@ -149,28 +153,28 @@ $(document).ready(function () {
                         <div class="input-group" id="txtHint">\
                             <span class="input-group-addon" id="basic-addon1">R$</span>\
                             <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
-                                   name="ValorServico'+x+'" value="">\
+                                   name="ValorServico'+ps+'" value="">\
                         </div>\
                     </div>\
                     <div class="col-md-3">\
                         <label><br></label><br>\
-                        <a href="#" id="'+x+'" class="remove_field btn btn-danger">\
+                        <a href="#" id="'+ps+'" class="remove_field btn btn-danger">\
                             <span class="glyphicon glyphicon-trash"></span>\
                         </a>\
                     </div>\
                 </div>\
             </div>'
         ); //add input box
-        //$(".input_fields_wrap").append('<select id="listadinamica'+x+'"></select>'); //add input box
-        //$("#listadinamica"+x).append($("<option></option>").val(1).html("um"));
-        //$("#listadinamica"+x).append($("<option></option>").val(2).html("dois"));
+        //$(".input_fields_wrap").append('<select id="listadinamica'+ps+'"></select>'); //add input box
+        //$("#listadinamica"+ps).append($("<option></option>").val(1).html("um"));
+        //$("#listadinamica"+ps).append($("<option></option>").val(2).html("dois"));
 
         //get a reference to the select element
-        $select = $('#listadinamica'+x);
+        $select = $('#listadinamica'+ps);
 
         //request the JSON data and parse into the select element
         $.ajax({
-            url: window.location.origin+'/salao/getvalues_json.php',
+            url: window.location.origin+'/salao/getvalues_json.php?q=1',
             dataType: 'JSON',
             type: "GET",
             success: function (data) {
@@ -199,66 +203,90 @@ $(document).ready(function () {
         //alert($(this).attr("id"));
     })
 
-    /*
-     * Pega o valor selecionado de um menu dropdown e adiciona numa lista
-    */
-    $("select[id='lista']").click(function () {
-        //alert( $(this).attr('value') );
-        //alert( $( "#lista" ).val() );
-        //alert( $( "#lista option:selected" ).text() );
-        str = $( "#lista option:selected" ).val();
+    //adiciona campos dinamicamente
+    var pc = 1; //initlal text box count
+    $(".add_field_button2").click(function(e){ //on add input button click
+        e.preventDefault();
         
-        if (str == "") {
-            document.getElementById("txtHint").innerHTML = "";
-            return;
-        } else { 
-            alert( str );
-            
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        pc++; //text box increment
+        $("#PCount").val(pc);
+        
+        $(".input_fields_wrap2").append('\
+            <div class="form-group" id="div'+pc+'">\
+                <div class="row">\
+                    <div class="col-md-4">\
+                        <label for="idTab_Produto">Produto:</label><br>\
+                        <select class="form-control" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'">\
+                            <option value="">-- Selecione uma opção --</option>\
+                        </select>\
+                    </div>\
+                    <div class="col-md-3">\
+                        <label for="ValorProduto">Valor do Produto:</label><br>\
+                        <div class="input-group id="txtHint">\
+                            <span class="input-group-addon" id="basic-addon1">R$</span>\
+                            <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
+                                   name="ValorProduto'+pc+'" value="">\
+                        </div>\
+                    </div>\
+                    <div class="col-md-1">\
+                        <label for="QuantidadeCompra">Qtd:</label><br>\
+                        <div class="input-group">\
+                            <input type="text" class="form-control" maxlength="3" placeholder="0"\
+                                   name="QuantidadeCompra'+pc+'" value="">\
+                        </div>\
+                    </div>\
+                    <div class="col-md-3">\
+                        <label for="Subtotal">Subtotal:</label><br>\
+                        <div class="input-group id="txtHint">\
+                            <span class="input-group-addon" id="basic-addon1">R$</span>\
+                            <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
+                                   name="Subtotal'+pc+'" value="">\
+                        </div>\
+                    </div>\
+                    <div class="col-md-1">\
+                        <label><br></label><br>\
+                        <a href="#" id="'+pc+'" class="remove_field btn btn-danger">\
+                            <span class="glyphicon glyphicon-trash"></span>\
+                        </a>\
+                    </div>\
+                </div>\
+            </div>'
+        ); //add input box
+
+
+        //get a reference to the select element
+        $select = $('#listadinamicab'+pc);
+
+        //request the JSON data and parse into the select element
+        $.ajax({
+            url: window.location.origin+'/salao/getvalues_json.php?q=2',
+            dataType: 'JSON',
+            type: "GET",
+            success: function (data) {
+                //clear the current content of the select
+                $select.html('');
+                //iterate over the data and append a select option
+                $select.append('<option value="">-- Selecione uma opção --</option>');
+                $.each(data, function (key, val) {
+                    //alert(val.id);
+                    $select.append('<option id="' + val.id + '">' + val.name + '</option>');
+                })
+            },
+            error: function () {
+                alert('erro');
+                //if there is an error append a 'none available' option
+                $select.html('<option id="-1">ERRO</option>');
             }
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("txtHint").innerHTML = this.responseText;
-                }
-            };
-            xmlhttp.open("GET","getvalues.php?q="+str,true);
-            xmlhttp.send();
-        }
-        
+
+        });
+
     });
-     
-    
-    /*
-    function addValues(str) {
-        if (str == "") {
-            document.getElementById("txtHint").innerHTML = "";
-            return;
-        } else { 
-            alert( 'oi' );
-            /*
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("txtHint").innerHTML = this.responseText;
-                }
-            };
-            xmlhttp.open("GET","getuser.php?q="+str,true);
-            xmlhttp.send();
-        }
-    }    */
-    
-    //$( "select[id='lista'] option:selected" ).text();
+
+    //Remove os campos adicionados dinamicamente
+    $(".input_fields_wrap2").on("click",".remove_field", function(e){ //user click on remove text
+        $("#div"+$(this).attr("id")).remove();
+
+    })
 
     /*
      * As duas funções a seguir servem para exibir ou ocultar uma div em função

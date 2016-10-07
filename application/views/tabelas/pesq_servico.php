@@ -29,7 +29,7 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="idApp_Servico" value="<?php echo $query['idApp_Servico']; ?>">
+                        <input type="hidden" name="idTab_Servico" value="<?php echo $query['idTab_Servico']; ?>">
 
                     </div>
 
@@ -40,7 +40,7 @@
                             <?php echo $button ?>
                         </div>
 
-                        <input type="hidden" name="idApp_Servico" value="<?php echo $query['idApp_Servico']; ?>">
+                        <input type="hidden" name="idTab_Servico" value="<?php echo $query['idTab_Servico']; ?>">
                     </div>                
                 </form>
 

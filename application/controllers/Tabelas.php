@@ -192,7 +192,7 @@ class Tabelas extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idApp_Servico',
+            'idTab_Servico',
             'NomeServico',
             'ValorServico',
                 ), TRUE));
@@ -234,9 +234,9 @@ class Tabelas extends CI_Controller {
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
 
-            $data['idApp_Servico'] = $this->Tabelas_model->set_servico($data['query']);
+            $data['idTab_Servico'] = $this->Tabelas_model->set_servico($data['query']);
 
-            if ($data['idApp_Servico'] === FALSE) {
+            if ($data['idTab_Servico'] === FALSE) {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
@@ -244,7 +244,7 @@ class Tabelas extends CI_Controller {
             } else {
 
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Tabelas'], FALSE);
-                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Servico', 'CREATE', $data['auditoriaitem']);
+                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Servico', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
                 redirect(base_url() . 'tabelas/servico' . $data['msg']);
@@ -266,7 +266,7 @@ class Tabelas extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idApp_Servico',
+            'idTab_Servico',
             'NomeServico',
             'ValorServico',
                 ), TRUE));
@@ -309,12 +309,12 @@ class Tabelas extends CI_Controller {
             $data['query']['ValorServico'] = str_replace(',','.',str_replace('.','',$data['query']['ValorServico']));
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
 
-            $data['anterior'] = $this->Tabelas_model->get_servico($data['query']['idApp_Servico']);
+            $data['anterior'] = $this->Tabelas_model->get_servico($data['query']['idTab_Servico']);
             $data['campos'] = array_keys($data['query']);
 
-            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Servico'], TRUE);
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idTab_Servico'], TRUE);
 
-            if ($data['auditoriaitem'] && $this->Tabelas_model->update_servico($data['query'], $data['query']['idApp_Servico']) === FALSE) {
+            if ($data['auditoriaitem'] && $this->Tabelas_model->update_servico($data['query'], $data['query']['idTab_Servico']) === FALSE) {
                 $data['msg'] = '?m=2';
                 redirect(base_url() . 'tabelas/alterar_servico/' . $data['query']['idApp_Responsavel'] . $data['msg']);
                 exit();
@@ -323,7 +323,7 @@ class Tabelas extends CI_Controller {
                 if ($data['auditoriaitem'] === FALSE) {
                     $data['msg'] = '';
                 } else {
-                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Servico', 'UPDATE', $data['auditoriaitem']);
+                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Servico', 'UPDATE', $data['auditoriaitem']);
                     $data['msg'] = '?m=1';
                 }
 
@@ -345,7 +345,7 @@ class Tabelas extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idApp_Produto',
+            'idTab_Produto',
             'NomeProduto',
             'QuantidadeCompra',
             'Unidade',
@@ -392,9 +392,9 @@ class Tabelas extends CI_Controller {
             $data['campos'] = array_keys($data['query']);
             $data['anterior'] = array();
 
-            $data['idApp_Produto'] = $this->Tabelas_model->set_produto($data['query']);
+            $data['idTab_Produto'] = $this->Tabelas_model->set_produto($data['query']);
 
-            if ($data['idApp_Produto'] === FALSE) {
+            if ($data['idTab_Produto'] === FALSE) {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
@@ -402,7 +402,7 @@ class Tabelas extends CI_Controller {
             } else {
 
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Tabelas'], FALSE);
-                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Produto', 'CREATE', $data['auditoriaitem']);
+                $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'CREATE', $data['auditoriaitem']);
                 $data['msg'] = '?m=1';
 
                 redirect(base_url() . 'tabelas/produto' . $data['msg']);
@@ -423,7 +423,7 @@ class Tabelas extends CI_Controller {
             $data['msg'] = '';
 
         $data['query'] = quotes_to_entities($this->input->post(array(
-            'idApp_Produto',
+            'idTab_Produto',
             'NomeProduto',
             'QuantidadeCompra',
             'Unidade',
@@ -469,12 +469,12 @@ class Tabelas extends CI_Controller {
             $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
 
-            $data['anterior'] = $this->Tabelas_model->get_produto($data['query']['idApp_Produto']);
+            $data['anterior'] = $this->Tabelas_model->get_produto($data['query']['idTab_Produto']);
             $data['campos'] = array_keys($data['query']);
 
-            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idApp_Produto'], TRUE);
+            $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['query']['idTab_Produto'], TRUE);
 
-            if ($data['auditoriaitem'] && $this->Tabelas_model->update_produto($data['query'], $data['query']['idApp_Produto']) === FALSE) {
+            if ($data['auditoriaitem'] && $this->Tabelas_model->update_produto($data['query'], $data['query']['idTab_Produto']) === FALSE) {
                 $data['msg'] = '?m=2';
                 redirect(base_url() . 'tabelas/alterar_produto/' . $data['query']['idApp_Responsavel'] . $data['msg']);
                 exit();
@@ -483,7 +483,7 @@ class Tabelas extends CI_Controller {
                 if ($data['auditoriaitem'] === FALSE) {
                     $data['msg'] = '';
                 } else {
-                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Produto', 'UPDATE', $data['auditoriaitem']);
+                    $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'Tab_Produto', 'UPDATE', $data['auditoriaitem']);
                     $data['msg'] = '?m=1';
                 }
 

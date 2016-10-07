@@ -143,16 +143,24 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="idApp_Servico">Serviço:</label>
+                            <input type="text" name="SCount" id="SCount" value="1"/>
+                        </div>
+                    </div>
+                </div>                 
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="idTab_Servico">Serviço:</label>
                             <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/servico" role="button"> 
                                 <span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
                             </a>
                             <select data-placeholder="Selecione uma opção..." class="form-control" onchange="addValues(this.value)" <?php echo $readonly; ?>
-                                    id="lista" name="idApp_Servico">
+                                    id="lista" name="idTab_Servico1">
                                 <option value="">-- Selecione uma opção --</option>
                                 <?php
                                 foreach ($select['Servico'] as $key => $row) {
-                                    if ($query['idApp_Servico'] == $key) {
+                                    if ($query['idTab_Servico'] == $key) {
                                         echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
                                     } else {
                                         echo '<option value="' . $key . '">' . $row . '</option>';
@@ -166,7 +174,7 @@
                             <div class="input-group" id="txtHint">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
                                 <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""
-                                       name="ValorServico" value="<?php echo $query['ValorServico'] ?>">
+                                       name="ValorServico1" value="<?php echo $query['ValorServico'] ?>">
                             </div>
                         </div>                          
                     </div>               
@@ -189,16 +197,24 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-4">
-                            <label for="idApp_Produto">Produto:</label>
+                            <input type="text" name="PCount" id="PCount" value="1"/>
+                        </div>
+                    </div>
+                </div>   
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="idTab_Produto">Produto:</label>
                             <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/produto" role="button"> 
                                 <span class="glyphicon glyphicon-plus"></span> <b>Novo Produto</b>
                             </a>
                             <select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
-                                    id="idApp_Produto" name="idApp_Produto">
+                                    id="idTab_Produto" name="idTab_Produto">
                                 <option value="">-- Selecione uma opção --</option>
                                 <?php
                                 foreach ($select['Produto'] as $key => $row) {
-                                    if ($query['idApp_Produto'] == $key) {
+                                    if ($query['idTab_Produto'] == $key) {
                                         echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
                                     } else {
                                         echo '<option value="' . $key . '">' . $row . '</option>';
@@ -207,9 +223,42 @@
                                 ?>   
                             </select>          
                         </div>
+                       <div class="col-md-3">
+                            <label for="ValorProduto">Valor do Produto:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">R$</span>
+                                <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""
+                                       name="ValorProduto1" value="<?php echo $query['ValorProduto'] ?>">
+                            </div>
+                        </div>                            
+                        <div class="col-md-1">
+                            <label for="QuantidadeCompra">Qtd:</label>                           
+                            <input type="text" class="form-control" maxlength="3" placeholder="0"
+                                   name="QuantidadeCompra1" value="<?php echo $query['QuantidadeCompra'] ?>">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="ValorServico">Subtotal:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">R$</span>
+                                <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""
+                                       name="" value="">
+                            </div>
+                        </div>                                      
                     </div>
                 </div>   
 
+                <div class="input_fields_wrap2"></div>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a class="add_field_button2 btn btn-xs btn-warning">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>                                   
+                
                 <hr>                
                 
                 <?php if ($metodo == 2) { ?>

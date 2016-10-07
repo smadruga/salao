@@ -14,27 +14,55 @@ if (!$db) {
 
 session_start();
 
-$result = mysql_query(
-        'SELECT
-            idApp_Servico,
-            NomeServico,
-            ValorServico
-        FROM 
-            App_Servico 
-        WHERE
-            idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-            idSis_Usuario = ' . $_SESSION['log']['id']
-);
+if ($_GET['q']==1) {
 
-while ($row = mysql_fetch_assoc($result)) {
-
-    $event_array[] = array(
-        'id' => $row['idApp_Servico'],
-        'name' => utf8_encode($row['NomeServico']),
-        'value' => $row['ValorServico'],
+    $result = mysql_query(
+            'SELECT
+                idTab_Servico,
+                NomeServico,
+                ValorServico
+            FROM 
+                Tab_Servico 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['id']
     );
-}
 
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Servico'],
+            'name' => utf8_encode($row['NomeServico']),
+            'value' => $row['ValorServico'],
+        );
+    }
+
+}
+elseif ($_GET['q'] == 2) {
+
+    $result = mysql_query(
+            'SELECT
+                idTab_Produto,
+                NomeProduto,
+                ValorVenda
+            FROM 
+                Tab_Produto 
+            WHERE
+                idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+                idSis_Usuario = ' . $_SESSION['log']['id']
+    );
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idTab_Servico'],
+            'name' => utf8_encode($row['NomeProduto']),
+            'value' => $row['ValorVenda'],
+        );
+    } 
+    
+}
+    
 echo json_encode($event_array);
 mysql_close($link);
 ?>

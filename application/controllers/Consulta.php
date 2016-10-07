@@ -59,6 +59,8 @@ class Consulta extends CI_Controller {
             'Obs',
             
             'ValorServico',
+            'ValorProduto',
+            'QuantidadeCompra',
                 ), TRUE));
 
         if ($idApp_Responsavel) {

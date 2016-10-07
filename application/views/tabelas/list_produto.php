@@ -19,7 +19,7 @@
             foreach ($q as $row)
             {
 
-                $url = base_url() . 'tabelas/alterar_produto/' . $row['idApp_Produto'];
+                $url = base_url() . 'tabelas/alterar_produto/' . $row['idTab_Produto'];
                 #$url = '';
 
                 echo '<tr class="clickable-row" data-href="' . $url . '">';

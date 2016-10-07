@@ -66,7 +66,7 @@
                             <?php echo $button ?>
                         </div>
 
-                        <input type="hidden" name="idApp_Produto" value="<?php echo $query['idApp_Produto']; ?>">
+                        <input type="hidden" name="idTab_Produto" value="<?php echo $query['idTab_Produto']; ?>">
                     </div>                
                 </form>
 
