@@ -23,9 +23,9 @@ var agora = n.substring(0, tam);
  });
  $("#demo").html(items);
  alert('fim');
- */
-
-$.getJSON("dt.json", function (result) {
+*/
+/*
+$.getJSON("rpc/dt.json", function (result) {
 
     var $teste = $("#teste");
     $teste.empty();
@@ -37,7 +37,7 @@ $.getJSON("dt.json", function (result) {
     }
     
 });
-
+ */
 $("#first-choice").change(function () {
 
     var $dropdown = $(this);
@@ -130,20 +130,74 @@ $(document).ready(function () {
 
     });     
 
-var x = 1; //initlal text box count
-$(".add_field_button").click(function(e){ //on add input button click
-    e.preventDefault();
-    x++; //text box increment
-    //$(".input_fields_wrap").append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
-    $(".input_fields_wrap").append(
-        '<div class="col-md-4"><label for="idApp_Servico">Serviço:</label><a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/servico" role="button"> <span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b></a><select data-placeholder="Selecione uma opção..." class="form-control" onchange="addValues(this.value)" <?php echo $readonly; ?>id="lista" name="idApp_Servico[]"><option value="">-- Selecione uma opção --</option><?phpforeach ($select[\'Servico\'] as $key => $row) {if ($query[\'idApp_Servico\'] == $key) {echo \'<option value="\' . $key . \'" selected="selected">\' . $row . \'</option>\';} else {echo \'<option value="\' . $key . \'">\' . $row . \'</option>\';}}?> </select></div>'
-    ); //add input box
+    var x = 1; //initlal text box count
+    $(".add_field_button").click(function(e){ //on add input button click
+        e.preventDefault();
+        x++; //text box increment
+        //$(".input_fields_wrap").append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box 
+        $(".input_fields_wrap").append('\
+            <div class="form-group" id="div'+x+'">\
+                <div class="row">\
+                    <div class="col-md-4">\
+                        <label for="idApp_Servico">Serviço:</label><br>\
+                        <select class="form-control" id="listadinamica'+x+'" name="idApp_Servico'+x+'">\
+                            <option value="">-- Selecione uma opção --</option>\
+                        </select>\
+                    </div>\
+                    <div class="col-md-3">\
+                        <label for="ValorServico">Valor do Serviço:</label><br>\
+                        <div class="input-group" id="txtHint">\
+                            <span class="input-group-addon" id="basic-addon1">R$</span>\
+                            <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
+                                   name="ValorServico'+x+'" value="">\
+                        </div>\
+                    </div>\
+                    <div class="col-md-3">\
+                        <label><br></label><br>\
+                        <a href="#" id="'+x+'" class="remove_field btn btn-danger">\
+                            <span class="glyphicon glyphicon-trash"></span>\
+                        </a>\
+                    </div>\
+                </div>\
+            </div>'
+        ); //add input box
+        //$(".input_fields_wrap").append('<select id="listadinamica'+x+'"></select>'); //add input box
+        //$("#listadinamica"+x).append($("<option></option>").val(1).html("um"));
+        //$("#listadinamica"+x).append($("<option></option>").val(2).html("dois"));
 
-});
+        //get a reference to the select element
+        $select = $('#listadinamica'+x);
 
-$(".input_fields_wrap").on("click",".remove_field", function(e){ //user click on remove text
-    e.preventDefault(); $(this).parent('div').remove();
-})
+        //request the JSON data and parse into the select element
+        $.ajax({
+            url: window.location.origin+'/salao/getvalues_json.php',
+            dataType: 'JSON',
+            type: "GET",
+            success: function (data) {
+                //clear the current content of the select
+                $select.html('');
+                //iterate over the data and append a select option
+                $select.append('<option value="">-- Selecione uma opção --</option>');
+                $.each(data, function (key, val) {
+                    //alert(val.id);
+                    $select.append('<option id="' + val.id + '">' + val.name + '</option>');
+                })
+            },
+            error: function () {
+                alert('erro');
+                //if there is an error append a 'none available' option
+                $select.html('<option id="-1">ERRO</option>');
+            }
+
+        });
+
+    });
+
+    $(".input_fields_wrap").on("click",".remove_field", function(e){ //user click on remove text
+        //e.preventDefault(); $(this).parent('div').remove();
+        $("#div"+$(this).attr("id")).remove();
+        //alert($(this).attr("id"));
+    })
 
     /*
      * Pega o valor selecionado de um menu dropdown e adiciona numa lista
