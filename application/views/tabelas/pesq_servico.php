@@ -21,11 +21,11 @@
                         </div>
 
                         <div class="col-md-3">
-                            <label for="ValorServico">Valor do Serviço:</label><br>
+                            <label for="ValorVenda">Valor do Serviço:</label><br>
                             <div class="input-group" id="txtHint">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
                                 <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00"
-                                       autofocus name="ValorServico" value="<?php echo $query['ValorServico'] ?>">
+                                       autofocus name="ValorVenda" value="<?php echo $query['ValorVenda'] ?>">
                             </div>
                         </div>
 

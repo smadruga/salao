@@ -194,13 +194,13 @@ class Tabelas extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idTab_Servico',
             'NomeServico',
-            'ValorServico',
+            'ValorVenda',
                 ), TRUE));
 
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('NomeServico', 'Nome do Serviço', 'required|trim');
-        $this->form_validation->set_rules('ValorServico', 'Valor do Serviço', 'required|trim');
+        $this->form_validation->set_rules('ValorVenda', 'Valor do Serviço', 'required|trim');
 
         $data['titulo'] = 'Cadastrar Serviço';
         $data['form_open_path'] = 'tabelas/servico';
@@ -227,7 +227,7 @@ class Tabelas extends CI_Controller {
         } else {
 
             $data['query']['NomeServico'] = trim(mb_strtoupper($data['query']['NomeServico'], 'ISO-8859-1'));
-            $data['query']['ValorServico'] = str_replace(',','.',str_replace('.','',$data['query']['ValorServico']));
+            $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['query']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 
@@ -268,7 +268,7 @@ class Tabelas extends CI_Controller {
         $data['query'] = quotes_to_entities($this->input->post(array(
             'idTab_Servico',
             'NomeServico',
-            'ValorServico',
+            'ValorVenda',
                 ), TRUE));
 
 
@@ -279,7 +279,7 @@ class Tabelas extends CI_Controller {
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
 
         $this->form_validation->set_rules('NomeServico', 'Nome do Serviço', 'required|trim');
-        $this->form_validation->set_rules('ValorServico', 'Valor do Serviço', 'required|trim');        
+        $this->form_validation->set_rules('ValorVenda', 'Valor do Serviço', 'required|trim');        
 
         $data['titulo'] = 'Editar Serviço';
         $data['form_open_path'] = 'tabelas/alterar_servico';
@@ -306,7 +306,7 @@ class Tabelas extends CI_Controller {
         } else {
 
             $data['query']['NomeServico'] = trim(mb_strtoupper($data['query']['NomeServico'], 'ISO-8859-1'));
-            $data['query']['ValorServico'] = str_replace(',','.',str_replace('.','',$data['query']['ValorServico']));
+            $data['query']['ValorVenda'] = str_replace(',','.',str_replace('.','',$data['query']['ValorVenda']));
             $data['query']['idSis_Usuario'] = $_SESSION['log']['id'];
 
             $data['anterior'] = $this->Tabelas_model->get_servico($data['query']['idTab_Servico']);
