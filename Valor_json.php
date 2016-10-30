@@ -14,23 +14,22 @@ if (!$db) {
 
 session_start();
 
-
 $result = mysql_query(
         'SELECT
             *
         FROM 
-            app.Tab_Servico AS S
+            app.Tab_' . $_GET['tabela'] . ' AS T
         WHERE
-            S.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-            S.idSis_Usuario = ' . $_SESSION['log']['id'] . '          
-        ORDER BY S.NomeServico ASC'
+            T.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+            T.idSis_Usuario = ' . $_SESSION['log']['id'] . '          
+        ORDER BY T.Nome' . $_GET['tabela'] . ' ASC'
 );
 
 while ($row = mysql_fetch_assoc($result)) {
 
     $event_array[] = array(
-        'id' => $row['idTab_Servico'],
-        'valor' => str_replace(".", ",", $row['ValorServico']),
+        'id' => $row['idTab_' . $_GET['tabela']],
+        'valor' => str_replace(".", ",", $row['ValorVenda']),
     );
 }
 

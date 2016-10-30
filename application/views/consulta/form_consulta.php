@@ -150,7 +150,7 @@
                                 <span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
                             </a>
                             <!--<select data-placeholder="Selecione uma opção..." class="form-control" onchange="addValues(this.value)" <?php echo $readonly; ?>-->
-                            <select data-placeholder="Selecione uma opção..." class="form-control" onchange="valorServico(this.value,this.name)" <?php echo $readonly; ?>
+                            <select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor(this.value,this.name,'Servico')" <?php echo $readonly; ?>
                                     id="lista" name="idTab_Servico1">
                                 <option value="">-- Selecione uma opção --</option>
                                 <?php
@@ -165,11 +165,11 @@
                             </select>          
                         </div>
                         <div class="col-md-3">
-                            <label for="ValorServico">Valor do Serviço:</label>
+                            <label for="ValorVenda">Valor do Serviço:</label>
                             <div class="input-group" id="txtHint">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
                                 <input type="text" class="form-control Valor" id="idTab_Servico1" maxlength="10" placeholder="0,00" readonly=""
-                                       name="ValorServico1" value="<?php echo $servico['ValorServico1'] ?>">
+                                       name="ValorVenda1" value="<?php echo $servico['ValorVenda1'] ?>">
                             </div>
                         </div>                          
                     </div>               
@@ -198,7 +198,7 @@
                             <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/produto" role="button"> 
                                 <span class="glyphicon glyphicon-plus"></span> <b>Novo Produto</b>
                             </a>
-                            <select data-placeholder="Selecione uma opção..." class="form-control" <?php echo $readonly; ?>
+                            <select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor(this.value,this.name,'Produto')" <?php echo $readonly; ?>
                                     id="idTab_Produto" name="idTab_Produto1">
                                 <option value="">-- Selecione uma opção --</option>
                                 <?php
@@ -216,7 +216,7 @@
                             <label for="ValorProduto">Valor do Produto:</label>
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
-                                <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""
+                                <input type="text" class="form-control Valor" id="idTab_Produto1" maxlength="10" placeholder="0,00" readonly=""
                                        name="ValorProduto1" value="<?php echo $produto['ValorProduto1'] ?>">
                             </div>
                         </div>                            
@@ -226,7 +226,7 @@
                                    name="Quantidade1" value="<?php echo $produto['Quantidade1'] ?>">
                         </div>
                         <div class="col-md-3">
-                            <label for="ValorServico">Subtotal:</label>
+                            <label for="ValorVenda">Subtotal:</label>
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
                                 <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""

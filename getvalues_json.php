@@ -20,7 +20,7 @@ if ($_GET['q']==1) {
             'SELECT
                 idTab_Servico,
                 NomeServico,
-                ValorServico
+                ValorVenda
             FROM 
                 Tab_Servico 
             WHERE
@@ -33,7 +33,7 @@ if ($_GET['q']==1) {
         $event_array[] = array(
             'id' => $row['idTab_Servico'],
             'name' => utf8_encode($row['NomeServico']),
-            'value' => $row['ValorServico'],
+            'value' => $row['ValorVenda'],
         );
     }
 

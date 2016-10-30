@@ -246,14 +246,14 @@ class Basico_model extends CI_Model {
                 'SELECT '
                     . 'idTab_Servico, '
                     . 'NomeServico, '
-                    . 'ValorServico '
+                    . 'ValorVenda '
                     . 'FROM '
                     . 'Tab_Servico '
                     . 'WHERE '
                     . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
                     . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] );
         } else {
-            $query = $this->db->query('SELECT idTab_Servico, NomeServico, ValorServico FROM Tab_Servico WHERE idSis_Usuario = ' . $_SESSION['log']['id']);
+            $query = $this->db->query('SELECT idTab_Servico, NomeServico, ValorVenda FROM Tab_Servico WHERE idSis_Usuario = ' . $_SESSION['log']['id']);
             
             $array = array();
             foreach ($query->result() as $row) {

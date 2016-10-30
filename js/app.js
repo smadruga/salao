@@ -41,15 +41,16 @@ $.getJSON("rpc/dt.json", function (result) {
 
 
 /*
- * Função responsável por capturar o serviço selecionado e buscar seu valor
- * correspondente no arquivo Servico_json.php. Após obter o valor ele é
+ * Função responsável por capturar o serviço/produto selecionado e buscar seu valor
+ * correspondente no arquivo Valor_json.php. Após obter o valor ele é
  * aplicado no campo de Valor correspondente.
  * 
  * @param {int} id
  * @param {string} campo
+ * @param {string} tabela
  * @returns {decimal}
  */
-function valorServico(id, campo) {
+function buscaValor(id, campo, tabela) {
     //alert(id + ' ' + campo);
     
     //$('#idTab_Servico1').val(v);
@@ -76,7 +77,7 @@ function valorServico(id, campo) {
     
     $.ajax({
         // url para o arquivo json.php
-        url: window.location.origin + "/" + str + "/Servico_json.php",
+        url: window.location.origin + "/" + str + "/Valor_json.php?tabela=" + tabela,
         // dataType json
         dataType: "json",
         // função para de sucesso
@@ -88,7 +89,7 @@ function valorServico(id, campo) {
                 if (data[$i].id == id) {
                     
                     $('#'+campo).val(data[$i].valor);
-                    //alert(data[$i].id + " " + data[$i].valor);
+                    alert(campo + " " + data[$i].id + " " + data[$i].valor);
                     break;
                 }                    
                 
@@ -98,7 +99,6 @@ function valorServico(id, campo) {
     });//termina o ajax
 
 }
-
 
 $("#first-choice").change(function () {
 
@@ -206,7 +206,7 @@ $(document).ready(function () {
                 <div class="row">\
                     <div class="col-md-4">\
                         <label for="idTab_Servico">Serviços:</label><br>\
-                        <select class="form-control" id="listadinamica'+ps+'" onchange="valorServico(this.value,this.name)" name="idTab_Servico'+ps+'">\
+                        <select class="form-control" id="listadinamica'+ps+'" onchange="buscaValor(this.value,this.name,\'Servico\')" name="idTab_Servico'+ps+'">\
                             <option value="">-- Selecione uma opção --</option>\
                         </select>\
                     </div>\
@@ -278,7 +278,7 @@ $(document).ready(function () {
                 <div class="row">\
                     <div class="col-md-4">\
                         <label for="idTab_Produto">Produto:</label><br>\
-                        <select class="form-control" id="listadinamicab'+pc+'" name="idTab_Produto'+pc+'">\
+                        <select class="form-control" id="listadinamicab'+pc+'" onchange="buscaValor(this.value,this.name,\'Produto\')" name="idTab_Produto'+pc+'">\
                             <option value="">-- Selecione uma opção --</option>\
                         </select>\
                     </div>\
@@ -286,7 +286,7 @@ $(document).ready(function () {
                         <label for="ValorProduto">Valor do Produto:</label><br>\
                         <div class="input-group id="txtHint">\
                             <span class="input-group-addon" id="basic-addon1">R$</span>\
-                            <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
+                            <input type="text" class="form-control Valor" id="idTab_Produto'+pc+'" maxlength="10" placeholder="0,00" readonly=""\
                                    name="ValorProduto'+pc+'" value="">\
                         </div>\
                     </div>\

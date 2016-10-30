@@ -63,7 +63,7 @@ class Consulta extends CI_Controller {
             'SCount',
 
             'idTab_Servico1',
-            'ValorServico1',
+            'ValorVenda1',
         ), TRUE));        
 
         $data['produto'] = quotes_to_entities($this->input->post(array(
@@ -85,10 +85,10 @@ class Consulta extends CI_Controller {
                 
                 if ($this->input->post('idTab_Servico'.$i)) {
                     $data['servico']['idTab_Servico'][$j] = $this->input->post('idTab_Servico'.$i);
-                    $data['servico']['ValorServico'][$j] = $this->input->post('ValorServico'.$i);
+                    $data['servico']['ValorVenda'][$j] = $this->input->post('ValorVenda'.$i);
                     
                     $sq = $sq . '("' . $this->input->post('idTab_Servico'.$i) . '", ';
-                    //$sq = $sq . '\'' . $this->input->post('ValorServico'.$i) . '\'), ';                    
+                    //$sq = $sq . '\'' . $this->input->post('ValorVenda'.$i) . '\'), ';                    
                     $sq = $sq . '"0.00"), ';
                     
                     $j++;
@@ -100,10 +100,10 @@ class Consulta extends CI_Controller {
         else {
             if ($this->input->post('idTab_Servico1')) {
                 $data['servico']['idTab_Servico'][1] = $this->input->post('idTab_Servico1');
-                $data['servico']['ValorServico'][1] = $this->input->post('ValorServico1');
+                $data['servico']['ValorVenda'][1] = $this->input->post('ValorVenda1');
                 
                 $sq = $sq . '("' . $this->input->post('idTab_Servico1') . '", ';
-                //$sq = $sq . '\'' . $this->input->post('ValorServico1') . '\'), ';                 
+                //$sq = $sq . '\'' . $this->input->post('ValorVenda1') . '\'), ';                 
                 $sq = $sq . '"0.00"), ';
             }
         }
@@ -249,7 +249,7 @@ class Consulta extends CI_Controller {
                 $this->load->view('consulta/form_consulta', $data);
             } else {
                 
-                $this->Consulta_model->set_dados_dinamicos('App_Servico','idTab_Servico, ValorServico',$sq);
+                $this->Consulta_model->set_dados_dinamicos('App_Servico','idTab_Servico, ValorVenda',$sq);
                 $this->Consulta_model->set_dados_dinamicos('App_Produto','`idTab_Produto`, `ValorProduto`, `Quantidade`',$pq);
                 $data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_Consulta'], FALSE);
                 $data['auditoria'] = $this->Basico_model->set_auditoria($data['auditoriaitem'], 'App_Consulta', 'CREATE', $data['auditoriaitem']);

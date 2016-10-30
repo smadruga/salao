@@ -42,7 +42,7 @@ class Consulta_model extends CI_Model {
         */
         
         $query = $this->db->query('INSERT INTO ' . $table . ' (' . $fields . ') VALUES ' . $data);
-        //$query = $this->db->query('INSERT INTO App_Servico (idTab_Servico, ValorServico) VALUES ' . $data);
+        //$query = $this->db->query('INSERT INTO App_Servico (idTab_Servico, ValorVenda) VALUES ' . $data);
         //$this->db->insert($table, $data);
                 
         if ($this->db->affected_rows() === 0)
