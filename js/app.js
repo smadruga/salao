@@ -38,6 +38,68 @@ $.getJSON("rpc/dt.json", function (result) {
     
 });
  */
+
+
+/*
+ * Função responsável por capturar o serviço selecionado e buscar seu valor
+ * correspondente no arquivo Servico_json.php. Após obter o valor ele é
+ * aplicado no campo de Valor correspondente.
+ * 
+ * @param {int} id
+ * @param {string} campo
+ * @returns {decimal}
+ */
+function valorServico(id, campo) {
+    //alert(id + ' ' + campo);
+    
+    //$('#idTab_Servico1').val(v);
+    
+    /*
+     var text = '{"employees":[' +
+     '{"firstName":"John","lastName":"Doe" },' +
+     '{"firstName":"Anna","lastName":"Smith" },' +
+     '{"firstName":"Peter","lastName":"Jones" }]}';
+    
+    obj = JSON.parse(text);
+    document.getElementById("demo").innerHTML = obj.employees[1].firstName + " " + obj.employees[1].lastName;    
+
+    alert(obj.employees[v].firstName + " " + obj.employees[v].lastName);*/    
+    
+    //sequencia de comandos necessária para estrair a pasta raiz do endereço,
+    //ou seja, qual módulo está sendo utilizado (ex: salao, odonto, etc)
+    str = window.location.pathname;
+    str = str.substring(1);
+    pos = str.indexOf('/');
+    str = str.substring(0, pos);
+    
+    //alert(str);
+    
+    $.ajax({
+        // url para o arquivo json.php
+        url: window.location.origin + "/" + str + "/Servico_json.php",
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+
+            // executo este laço para ecessar os itens do objeto javaScript
+            for ($i = 0; $i < data.length; $i++) {
+                
+                if (data[$i].id == id) {
+                    
+                    $('#'+campo).val(data[$i].valor);
+                    //alert(data[$i].id + " " + data[$i].valor);
+                    break;
+                }                    
+                
+            }//fim do laço
+
+        }
+    });//termina o ajax
+
+}
+
+
 $("#first-choice").change(function () {
 
     var $dropdown = $(this);
@@ -143,8 +205,8 @@ $(document).ready(function () {
             <div class="form-group" id="div'+ps+'">\
                 <div class="row">\
                     <div class="col-md-4">\
-                        <label for="idTab_Servico">Serviço:</label><br>\
-                        <select class="form-control" id="listadinamica'+ps+'" name="idTab_Servico'+ps+'">\
+                        <label for="idTab_Servico">Serviços:</label><br>\
+                        <select class="form-control" id="listadinamica'+ps+'" onchange="valorServico(this.value,this.name)" name="idTab_Servico'+ps+'">\
                             <option value="">-- Selecione uma opção --</option>\
                         </select>\
                     </div>\
@@ -152,7 +214,7 @@ $(document).ready(function () {
                         <label for="ValorServico">Valor do Serviço:</label><br>\
                         <div class="input-group" id="txtHint">\
                             <span class="input-group-addon" id="basic-addon1">R$</span>\
-                            <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
+                            <input type="text" class="form-control Valor" id="idTab_Servico'+ps+'" maxlength="10" placeholder="0,00" readonly=""\
                                    name="ValorServico'+ps+'" value="">\
                         </div>\
                     </div>\
@@ -287,6 +349,18 @@ $(document).ready(function () {
         $("#div"+$(this).attr("id")).remove();
 
     })
+
+    /*
+     * Função para capturar o valor escolhido no campo select (Serviço e Produto, por exemplo)
+     */
+    $("#addValues").change(function () {
+        //var n = $(this).attr("value");
+        //var n = $("option:selected", this);
+        
+        alert (this.value);
+                
+        //alert('oi');
+    });
 
     /*
      * As duas funções a seguir servem para exibir ou ocultar uma div em função
@@ -434,6 +508,7 @@ $('#datepickerinline').datetimepicker({
     //defaultDate: '2015-01-01',
     locale: 'pt-br'
 });
+
 $("#datepickerinline").on("dp.change", function (e) {
     var d = new Date(e.date);
     $('#calendar').fullCalendar('gotoDate', d);

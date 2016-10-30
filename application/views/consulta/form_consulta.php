@@ -149,7 +149,8 @@
                             <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/servico" role="button"> 
                                 <span class="glyphicon glyphicon-plus"></span> <b>Novo Serviço</b>
                             </a>
-                            <select data-placeholder="Selecione uma opção..." class="form-control" onchange="addValues(this.value)" <?php echo $readonly; ?>
+                            <!--<select data-placeholder="Selecione uma opção..." class="form-control" onchange="addValues(this.value)" <?php echo $readonly; ?>-->
+                            <select data-placeholder="Selecione uma opção..." class="form-control" onchange="valorServico(this.value,this.name)" <?php echo $readonly; ?>
                                     id="lista" name="idTab_Servico1">
                                 <option value="">-- Selecione uma opção --</option>
                                 <?php
@@ -167,7 +168,7 @@
                             <label for="ValorServico">Valor do Serviço:</label>
                             <div class="input-group" id="txtHint">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
-                                <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""
+                                <input type="text" class="form-control Valor" id="idTab_Servico1" maxlength="10" placeholder="0,00" readonly=""
                                        name="ValorServico1" value="<?php echo $servico['ValorServico1'] ?>">
                             </div>
                         </div>                          
