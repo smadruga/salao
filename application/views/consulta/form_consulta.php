@@ -222,14 +222,14 @@
                         </div>                            
                         <div class="col-md-1">
                             <label for="Quantidade">Qtd:</label>                           
-                            <input type="text" class="form-control" maxlength="3" placeholder="0"
+                            <input type="text" class="form-control" maxlength="3" placeholder="0" onkeyup="calculaSubtotal(this.value,this.name,'1')" 
                                    name="Quantidade1" value="<?php echo $produto['Quantidade1'] ?>">
                         </div>
                         <div class="col-md-3">
                             <label for="ValorVenda">Subtotal:</label>
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
-                                <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""
+                                <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="Quantidade1"
                                        name="" value="">
                             </div>
                         </div>                                      

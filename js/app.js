@@ -89,7 +89,7 @@ function buscaValor(id, campo, tabela) {
                 if (data[$i].id == id) {
                     
                     $('#'+campo).val(data[$i].valor);
-                    alert(campo + " " + data[$i].id + " " + data[$i].valor);
+                    //alert(campo + " " + data[$i].id + " " + data[$i].valor);
                     break;
                 }                    
                 
@@ -98,6 +98,24 @@ function buscaValor(id, campo, tabela) {
         }
     });//termina o ajax
 
+}
+
+/*
+ * Função responsável por calcular o subtotal dos campos de produto
+ * 
+ * @param {int} quant
+ * @param {string} campo
+ * @param {int} num
+ * @returns {decimal}
+ */
+function calculaSubtotal(quant, campo, num) {
+    
+    var valor = $("#idTab_Produto"+num).val();
+    
+    var subtotal = (quant * valor.replace(",","."));
+    subtotal = subtotal.toFixed(2).replace(".",",");
+    $('#Quantidade'+num).val(subtotal);
+    
 }
 
 $("#first-choice").change(function () {
@@ -293,7 +311,7 @@ $(document).ready(function () {
                     <div class="col-md-1">\
                         <label for="QuantidadeCompra">Qtd:</label><br>\
                         <div class="input-group">\
-                            <input type="text" class="form-control" maxlength="3" placeholder="0"\
+                            <input type="text" class="form-control" maxlength="3" placeholder="0" onkeyup="calculaSubtotal(this.value,this.name,'+pc+')"\
                                    name="QuantidadeCompra'+pc+'" value="">\
                         </div>\
                     </div>\
@@ -301,7 +319,7 @@ $(document).ready(function () {
                         <label for="Subtotal">Subtotal:</label><br>\
                         <div class="input-group id="txtHint">\
                             <span class="input-group-addon" id="basic-addon1">R$</span>\
-                            <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly=""\
+                            <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="Quantidade'+pc+'"\
                                    name="Subtotal'+pc+'" value="">\
                         </div>\
                     </div>\
