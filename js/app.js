@@ -51,20 +51,6 @@ $.getJSON("rpc/dt.json", function (result) {
  * @returns {decimal}
  */
 function buscaValor(id, campo, tabela) {
-    //alert(id + ' ' + campo);
-    
-    //$('#idTab_Servico1').val(v);
-    
-    /*
-     var text = '{"employees":[' +
-     '{"firstName":"John","lastName":"Doe" },' +
-     '{"firstName":"Anna","lastName":"Smith" },' +
-     '{"firstName":"Peter","lastName":"Jones" }]}';
-    
-    obj = JSON.parse(text);
-    document.getElementById("demo").innerHTML = obj.employees[1].firstName + " " + obj.employees[1].lastName;    
-
-    alert(obj.employees[v].firstName + " " + obj.employees[v].lastName);*/    
     
     //sequencia de comandos necessária para estrair a pasta raiz do endereço,
     //ou seja, qual módulo está sendo utilizado (ex: salao, odonto, etc)
@@ -72,9 +58,7 @@ function buscaValor(id, campo, tabela) {
     str = str.substring(1);
     pos = str.indexOf('/');
     str = str.substring(0, pos);
-    
-    //alert(str);
-    
+       
     $.ajax({
         // url para o arquivo json.php
         url: window.location.origin + "/" + str + "/Valor_json.php?tabela=" + tabela,
@@ -88,8 +72,12 @@ function buscaValor(id, campo, tabela) {
                 
                 if (data[$i].id == id) {
                     
+                    //carrega o valor no campo de acordo com a opção selecionada
                     $('#'+campo).val(data[$i].valor);
-                    //alert(campo + " " + data[$i].id + " " + data[$i].valor);
+                    
+                    //para cada valor carregado o orçamento é calculado/atualizado
+                    //através da chamada de sua função
+                    calculaOrcamento();
                     break;
                 }                    
                 
@@ -97,6 +85,7 @@ function buscaValor(id, campo, tabela) {
 
         }
     });//termina o ajax
+    
 
 }
 
@@ -110,12 +99,64 @@ function buscaValor(id, campo, tabela) {
  */
 function calculaSubtotal(quant, campo, num) {
     
+    //variável valor recebe o valor do produto selecionado
     var valor = $("#idTab_Produto"+num).val();
     
+    //o subtotal é calculado como o produto da quantidade pelo seu valor
     var subtotal = (quant * valor.replace(",","."));
     subtotal = subtotal.toFixed(2).replace(".",",");
+    //o subtotal é escrito no seu campo no formulário
     $('#Quantidade'+num).val(subtotal);
     
+    //para cada vez que o subtotal for calculado o orçamento também será atualizado
+    calculaOrcamento();
+    
+}
+
+/*
+ * Função responsável por calcular o orçamento total
+ * 
+ * @returns {int}
+ */
+function calculaOrcamento() {
+    
+    //captura o número incrementador do formulário, que controla quantos campos
+    //foram acrescidos tanto para serviços quanto para produtos
+    var sc = parseFloat($('#SCount').val().replace(",","."));
+    var pc = parseFloat($('#PCount').val().replace(",","."));
+    //define o subtotal inicial em 0.00
+    var subtotal = 0.00;
+        
+    //variável incrementadora
+    var i = 1;       
+    //percorre todos os campos de serviço, somando seus valores
+    while (i <= sc) {
+        
+        //soma os valores apenas dos campos que existirem, o que forem apagados
+        //ou removidos são ignorados
+        if ($('#idTab_Servico'+i).val())
+            subtotal += parseFloat($('#idTab_Servico'+i).val().replace(",","."));
+        
+        //incrementa a variável i
+        i++;
+    }
+    
+    //faz o mesmo que o laço anterior mas agora para produtos
+    var i = 1;    
+    while (i <= pc) {
+        
+        if ($('#Quantidade'+i).val())
+            subtotal += parseFloat($('#Quantidade'+i).val().replace(",","."));
+        
+        i++;
+    }    
+    
+    //calcula o subtotal, configurando para duas casas decimais e trocando o 
+    //ponto para o vírgula como separador de casas decimais
+    subtotal = subtotal.toFixed(2).replace(".",",");
+    
+    //escreve o subtotal no campo do formulário
+    $('#OrcamentoTotal').val(subtotal);  
 }
 
 $("#first-choice").change(function () {
@@ -220,7 +261,7 @@ $(document).ready(function () {
         
         //$(".input_fields_wrap").append('<div><input type="text" name="mytext[]"/><a href="#" class="remove_field">Remove</a></div>'); //add input box 
         $(".input_fields_wrap").append('\
-            <div class="form-group" id="div'+ps+'">\
+            <div class="form-group" id="1div'+ps+'">\
                 <div class="row">\
                     <div class="col-md-4">\
                         <label for="idTab_Servico">Serviços:</label><br>\
@@ -278,9 +319,9 @@ $(document).ready(function () {
     });
 
     $(".input_fields_wrap").on("click",".remove_field", function(e){ //user click on remove text
-        //e.preventDefault(); $(this).parent('div').remove();
-        $("#div"+$(this).attr("id")).remove();
-        //alert($(this).attr("id"));
+        $("#1div"+$(this).attr("id")).remove();  
+        //após remover o campo refaz o cálculo do orçamento
+        calculaOrcamento();        
     })
 
     //adiciona campos dinamicamente
@@ -292,7 +333,7 @@ $(document).ready(function () {
         $("#PCount").val(pc);
         
         $(".input_fields_wrap2").append('\
-            <div class="form-group" id="div'+pc+'">\
+            <div class="form-group" id="2div'+pc+'">\
                 <div class="row">\
                     <div class="col-md-4">\
                         <label for="idTab_Produto">Produto:</label><br>\
@@ -325,7 +366,7 @@ $(document).ready(function () {
                     </div>\
                     <div class="col-md-1">\
                         <label><br></label><br>\
-                        <a href="#" id="'+pc+'" class="remove_field btn btn-danger">\
+                        <a href="#" id="'+pc+'" class="remove_field2 btn btn-danger">\
                             <span class="glyphicon glyphicon-trash"></span>\
                         </a>\
                     </div>\
@@ -363,9 +404,10 @@ $(document).ready(function () {
     });
 
     //Remove os campos adicionados dinamicamente
-    $(".input_fields_wrap2").on("click",".remove_field", function(e){ //user click on remove text
-        $("#div"+$(this).attr("id")).remove();
-
+    $(".input_fields_wrap2").on("click",".remove_field2", function(e){ //user click on remove text
+        $("#2div"+$(this).attr("id")).remove();
+        //após remover o campo refaz o cálculo do orçamento
+        calculaOrcamento();
     })
 
     /*
