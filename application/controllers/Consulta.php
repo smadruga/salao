@@ -58,14 +58,18 @@ class Consulta extends CI_Controller {
             'Procedimento',
             'Obs',
                 ), TRUE));
-
+        
+        //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver 
+        //comentado fim) mas por enquanto, se está funcionando, vou deixar assim.
+        /*
         $data['servico'] = quotes_to_entities($this->input->post(array(
             'SCount',
 
             'idTab_Servico1',
             'ValorVenda1',
         ), TRUE));        
-
+        */
+        $data['servico'] = array();
         $data['produto'] = quotes_to_entities($this->input->post(array(
             'PCount',
             
@@ -74,18 +78,32 @@ class Consulta extends CI_Controller {
             'Quantidade1',
         ), TRUE));     
         
-        //echo '==============================================>>>>>>>>>>'.$data['query']['SCount'] . ' :: ' . $data['query']['PCount'];
-        //echo $this->input->post('idTab_Servico2');
+        $data['orcamento']['OrcamentoTotal'] = $this->input->post('OrcamentoTotal');
+
+        (!$this->input->post('SCount')) ? $data['servico']['SCount'] = 1 : $data['servico']['SCount'] = $this->input->post('SCount');
+        (!$this->input->post('PCount')) ? $data['produto']['PCount'] = 1 : $data['produto']['PCount'] = $this->input->post('PCount');
         
+        //$data['lista']['Servicos'] = $this->Consulta_model->lista_servicos();
+        //$data['lista']['Produtos'] = $this->Consulta_model->lista_produtos();
+        
+        /*
+        echo $data['lista']['Servicos']['1'];
+              echo '<br>';
+              echo "<pre>";
+              print_r($data['lista']['Servicos']);
+              echo "</pre>";
+              exit();  
+         */
         $sq = '';
         if ($data['servico']['SCount']>1) {
             
-            $j=0;
-            for($i=0;$i<=$data['servico']['SCount'];$i++) {
+            $j=1;
+            for($i=1;$i<=$data['servico']['SCount'];$i++) {
                 
                 if ($this->input->post('idTab_Servico'.$i)) {
-                    $data['servico']['idTab_Servico'][$j] = $this->input->post('idTab_Servico'.$i);
-                    $data['servico']['ValorVenda'][$j] = $this->input->post('ValorVenda'.$i);
+                    $data['servico']['idTab_Servico'.$j] = $this->input->post('idTab_Servico'.$i);
+                    //$data['servico']['ValorVenda'.$j] = $data['lista']['Servicos'][$this->input->post('idTab_Servico'.$i)];
+                    $data['servico']['ValorVenda'.$j] = $this->input->post('ValorVenda'.$i);
                     
                     $sq = $sq . '("' . $this->input->post('idTab_Servico'.$i) . '", ';
                     //$sq = $sq . '\'' . $this->input->post('ValorVenda'.$i) . '\'), ';                    
@@ -95,64 +113,83 @@ class Consulta extends CI_Controller {
                 }
                                 
             }
+            $data['servico']['SCount'] = $j-1;
                 
         }
         else {
-            if ($this->input->post('idTab_Servico1')) {
-                $data['servico']['idTab_Servico'][1] = $this->input->post('idTab_Servico1');
-                $data['servico']['ValorVenda'][1] = $this->input->post('ValorVenda1');
-                
-                $sq = $sq . '("' . $this->input->post('idTab_Servico1') . '", ';
-                //$sq = $sq . '\'' . $this->input->post('ValorVenda1') . '\'), ';                 
-                $sq = $sq . '"0.00"), ';
-            }
+            
+            $data['servico']['idTab_Servico1'] = $this->input->post('idTab_Servico1');
+            $data['servico']['ValorVenda1'] = $this->input->post('ValorVenda1');
+
+            $sq = $sq . '("' . $this->input->post('idTab_Servico1') . '", ';
+            //$sq = $sq . '\'' . $this->input->post('ValorVenda1') . '\'), ';                 
+            $sq = $sq . '"0.00"), ';
+            //$j=1;
+            $data['servico']['SCount'] = 1;
+
         }
         $sq = substr($sq, 0, strlen($sq)-2);
         
+        /*
+              echo '<br>';
+              echo "<pre>";
+              print_r($data['servico']);
+              echo "</pre>";
+              exit();  
+          */    
         $pq = '';
         if ($data['produto']['PCount']>1) {
             
-            $j=0;
+            $j=1;
             for($i=0;$i<=$data['produto']['PCount'];$i++) {
                 
                 if ($this->input->post('idTab_Produto'.$i)) {
-                    $data['produto']['idTab_Produto'][$j] = $this->input->post('idTab_Produto'.$i);
-                    $data['produto']['ValorProduto'][$j] = $this->input->post('ValorProduto'.$i);
-                    $data['produto']['Quantidade'][$j] = $this->input->post('Quantidade'.$i);
+                    $data['produto']['idTab_Produto'.$j] = $this->input->post('idTab_Produto'.$i);
+                    $data['produto']['ValorVenda'.$j] = $this->input->post('ValorVenda'.$i);
+                    $data['produto']['Quantidade'.$j] = $this->input->post('Quantidade'.$i);
+                    $data['produto']['SubtotalProduto'.$j] = $this->input->post('SubtotalProduto'.$i);
                     
                     $pq = $pq . '(\'' . $this->input->post('idTab_Produto'.$i) . '\', ';
                     //$pq = $pq . '\'' . $this->input->post('ValorProduto'.$i) . '\', ';
                     $pq = $pq . '\'0.00\', ';
                     $pq = $pq . '\'' . $this->input->post('Quantidade'.$i) . '\'), ';
                     
-                    
                     $j++;
+                    
                 }
                                 
             }
+            $data['servico']['PCount'] = $j-1;            
+            //echo '<br>';
+            //exit();
                 
         }
         else {
-            if ($this->input->post('idTab_Produto1')) {
-                $data['produto']['idTab_Produto'][1] = $this->input->post('idTab_Produto1');
-                $data['produto']['ValorProduto1'][1] = $this->input->post('ValorProduto1');
-                $data['produto']['Quantidade1'][1] = $this->input->post('Quantidade1');
+            
+            $data['produto']['idTab_Produto1'] = $this->input->post('idTab_Produto1');
+            $data['produto']['ValorProduto1'] = $this->input->post('ValorProduto1');
+            $data['produto']['Quantidade1'] = $this->input->post('Quantidade1');
+            $data['produto']['SubtotalProduto1'] = $this->input->post('SubtotalProduto1');
 
-                $pq = $pq . '(\'' . $this->input->post('idTab_Produto1') . '\', ';
-                //$pq = $pq . '\'' . $this->input->post('ValorProduto1') . '\', ';
-                $pq = $pq . '\'0.00\', ';
-                $pq = $pq . '\'' . $this->input->post('Quantidade1') . '\'), ';                
-            }
+            $pq = $pq . '(\'' . $this->input->post('idTab_Produto1') . '\', ';
+            //$pq = $pq . '\'' . $this->input->post('ValorProduto1') . '\', ';
+            $pq = $pq . '\'0.00\', ';
+            $pq = $pq . '\'' . $this->input->post('Quantidade1') . '\'), ';            
+            
+            $data['servico']['PCount'] = 1;
+
         }
         $pq = substr($pq, 0, strlen($pq)-2);
-        //exit();        
+               
         /*
               echo '<br>';
               echo "<pre>";
-              print_r($data['servico']['idTab_Servico']);
+              print_r($data['produto']);
               echo "</pre>";
               exit();        
         */
+        
+        //Fim do trecho de código que dá pra melhorar
         
         if ($idApp_Responsavel) {
             $data['query']['idApp_Responsavel'] = $idApp_Responsavel;

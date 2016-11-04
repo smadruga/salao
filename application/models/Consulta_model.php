@@ -186,4 +186,60 @@ class Consulta_model extends CI_Model {
         return $array;
     }            
             
+    public function lista_servicos() {
+
+        $query = $this->db->query('SELECT '
+                . 'idTab_Servico,'
+                . 'ValorVenda '
+                . 'FROM Tab_Servico WHERE '
+                . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo']);
+        /*
+        if ($query->num_rows() === 0)
+            return FALSE;
+        else
+            return $query->result_array();
+         * 
+         */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Servico] = $row->ValorVenda;
+            }
+        }
+
+        return $array;        
+    }         
+
+    public function lista_produtos() {
+
+        $query = $this->db->query('SELECT '
+                . 'idTab_Produto,'
+                . 'ValorVenda '
+                . 'FROM Tab_Produto WHERE '
+                . 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+                . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo']);
+        /*
+        if ($query->num_rows() === 0)
+            return FALSE;
+        else
+            return $query->result_array();
+         * 
+         */
+        if ($query->num_rows() === 0) {
+            return FALSE;
+        } else {
+
+            $array = array();
+            foreach ($query->result() as $row) {
+                $array[$row->idTab_Produto] = $row->ValorVenda;
+            }
+        }
+
+        return $array;        
+    } 
+    
 }

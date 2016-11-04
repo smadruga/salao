@@ -140,8 +140,8 @@
 
                 <hr>
                 
-                <input type="hidden" name="SCount" id="SCount" value="1"/>
-                
+                <input type="hidden" name="SCount" id="SCount" value="<?php echo $servico['SCount']; ?>"/>
+                               
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-4">
@@ -175,7 +175,52 @@
                     </div>               
                 </div>   
                 
-                <div class="input_fields_wrap"></div>
+                <div class="input_fields_wrap">
+                
+                <?php
+                for ($i=2; $i <= $servico['SCount']; $i++) {
+                ?>
+                
+                <div class="form-group" id="1div<?php echo $i ?>">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="idTab_Servico">Serviço:</label>
+                            <select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor(this.value,this.name,'Servico')" <?php echo $readonly; ?>
+                                    id="lista" name="idTab_Servico<?php echo $i ?>">
+                                <option value="">-- Selecione uma opção --</option>
+                                <?php
+                                foreach ($select['Servico'] as $key => $row) {
+                                    if ($servico['idTab_Servico'.$i] == $key) {
+                                        echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+                                    } else {
+                                        echo '<option value="' . $key . '">' . $row . '</option>';
+                                    }
+                                }
+                                ?>   
+                            </select>          
+                        </div>
+                        <div class="col-md-3">
+                            <label for="ValorVenda">Valor do Serviço:</label>
+                            <div class="input-group" id="txtHint">
+                                <span class="input-group-addon" id="basic-addon1">R$</span>
+                                <input type="text" class="form-control Valor" id="idTab_Servico<?php echo $i ?>" maxlength="10" placeholder="0,00" readonly=""
+                                       name="ValorVenda<?php echo $i ?>" value="<?php echo $servico['ValorVenda'.$i] ?>"> 
+                            </div>
+                        </div>       
+                        <div class="col-md-3">
+                            <label><br></label><br>
+                            <button type="button" id="<?php echo $i ?>" class="remove_field btn btn-danger">                                
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>                       
+                    </div>               
+                </div>  
+                
+                <?php
+                }
+                ?>
+                
+                </div>
                 
                 <div class="form-group">
                     <div class="row">
@@ -189,7 +234,7 @@
                 
                 <hr>
                 
-                <input type="hidden" name="PCount" id="PCount" value="1"/>
+                <input type="hidden" name="PCount" id="PCount" value="<?php echo $produto['PCount']; ?>"/>
                 
                 <div class="form-group">
                     <div class="row">
@@ -198,7 +243,7 @@
                             <a class="btn btn-xs btn-info" href="<?php echo base_url() ?>tabelas/cadastrar/produto" role="button"> 
                                 <span class="glyphicon glyphicon-plus"></span> <b>Novo Produto</b>
                             </a>
-                            <select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor(this.value,this.name,'Produto')" <?php echo $readonly; ?>
+                            <select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor(this.value,this.name,'Produto','1')" <?php echo $readonly; ?>
                                     id="idTab_Produto" name="idTab_Produto1">
                                 <option value="">-- Selecione uma opção --</option>
                                 <?php
@@ -212,7 +257,7 @@
                                 ?>   
                             </select>          
                         </div>
-                       <div class="col-md-3">
+                        <div class="col-md-3">
                             <label for="ValorProduto">Valor do Produto:</label>
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
@@ -222,7 +267,7 @@
                         </div>                            
                         <div class="col-md-1">
                             <label for="Quantidade">Qtd:</label>                           
-                            <input type="t  ext" class="form-control" maxlength="3" placeholder="0" onkeyup="calculaSubtotal(this.value,this.name,'1')" 
+                            <input type="text" class="form-control" maxlength="3" id="Qtd1" placeholder="0" onkeyup="calculaSubtotal(this.value,this.name,'1')" 
                                    name="Quantidade1" value="<?php echo $produto['Quantidade1'] ?>">
                         </div>
                         <div class="col-md-3">
@@ -230,13 +275,71 @@
                             <div class="input-group">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
                                 <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="Quantidade1"
-                                       name="" value="">
+                                       name="SubtotalProduto1" value="<?php echo $produto['SubtotalProduto1'] ?>">
                             </div>
                         </div>                                      
                     </div>
                 </div>   
 
-                <div class="input_fields_wrap2"></div>
+                <div class="input_fields_wrap2">
+                    
+                <?php
+                for ($i=2; $i <= $servico['PCount']; $i++) {
+                ?>
+                
+                <div class="form-group" id="2div<?php echo $i ?>">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="idTab_Produto">Produto:</label>
+                            <select data-placeholder="Selecione uma opção..." class="form-control" onchange="buscaValor(this.value,this.name,'Produto','<?php echo $i ?>')" <?php echo $readonly; ?>
+                                     id="listadinamicab<?php echo $i ?>" name="idTab_Produto<?php echo $i ?>">
+                                <option value="">-- Selecione uma opção --</option>
+                                <?php
+                                foreach ($select['Produto'] as $key => $row) {
+                                    if ($produto['idTab_Produto'.$i] == $key) {
+                                        echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
+                                    } else {
+                                        echo '<option value="' . $key . '">' . $row . '</option>';
+                                    }
+                                }
+                                ?>   
+                            </select>          
+                        </div>
+                        <div class="col-md-3">
+                            <label for="ValorProduto">Valor do Produto:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">R$</span>
+                                <input type="text" class="form-control Valor" id="idTab_Produto<?php echo $i ?>" maxlength="10" placeholder="0,00" readonly=""
+                                       name="ValorVenda<?php echo $i ?>" value="<?php echo $produto['ValorVenda'.$i] ?>">
+                            </div>
+                        </div>                            
+                        <div class="col-md-1">
+                            <label for="Quantidade">Qtd:</label>                           
+                            <input type="text" class="form-control" maxlength="3" id="Qtd<?php echo $i ?>" placeholder="0" onkeyup="calculaSubtotal(this.value,this.name,'<?php echo $i ?>')" 
+                                   name="Quantidade<?php echo $i ?>" value="<?php echo $produto['Quantidade'.$i] ?>">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="ValorVenda">Subtotal:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">R$</span>
+                                <input type="text" class="form-control Valor" maxlength="10" placeholder="0,00" readonly="" id="Quantidade<?php echo $i ?>"
+                                       name="SubtotalProduto<?php echo $i ?>" value="<?php echo $produto['SubtotalProduto'.$i] ?>">
+                            </div>
+                        </div>    
+                        <div class="col-md-1">
+                            <label><br></label><br>
+                            <button type="button" id="<?php echo $i ?>" class="remove_field2 btn btn-danger">                                
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>                          
+                    </div>               
+                </div>  
+                
+                <?php
+                }
+                ?>                    
+                    
+                </div>
                 
                 <div class="form-group">
                     <div class="row">
@@ -257,7 +360,7 @@
                             <div class="input-group" id="txtHint">
                                 <span class="input-group-addon" id="basic-addon1">R$</span>
                                 <input type="text" class="form-control Valor" id="OrcamentoTotal" maxlength="10" placeholder="0,00" readonly=""
-                                       name="OrcamentoTotal" value="">
+                                       name="OrcamentoTotal" value="<?php echo $orcamento['OrcamentoTotal'] ?>">
                             </div>
                         </div>                          
                     </div>               
